@@ -57,16 +57,9 @@ use({
         "mfussenegger/nvim-dap",
     },
 })
-
 use({
-    -- Autocompletion
     "hrsh7th/nvim-cmp",
-    requires = { "hrsh7th/cmp-nvim-lsp", "saadparwaiz1/cmp_luasnip" },
-})
-use({
-    "L3MON4D3/LuaSnip",
-    after = "nvim-cmp",
-    requires = { { "rafamadriz/friendly-snippets" } },
+    requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 })
 use({
     "jose-elias-alvarez/null-ls.nvim",
@@ -89,7 +82,6 @@ use("dinhhuy258/git.nvim")
 use("tpope/vim-commentary")
 use("lukas-reineke/indent-blankline.nvim")
 use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" })
-
 if PACKER_BOOTSTRAP then
   require("packer").sync()
 end

@@ -75,10 +75,8 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
-    load_after = {},
     loaded = true,
-    needs_bufread = true,
-    path = "/home/morten/.local/share/nvim/site/pack/packer/opt/LuaSnip",
+    path = "/home/morten/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["cmp-nvim-lsp"] = {
@@ -95,11 +93,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/morten/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
-  },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/home/morten/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["git.nvim"] = {
     loaded = true,
@@ -227,11 +220,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd nvim-cmp ]]
-vim.cmd [[ packadd LuaSnip ]]
-time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
