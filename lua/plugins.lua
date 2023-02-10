@@ -61,7 +61,12 @@ use({
 use({
     -- Autocompletion
     "hrsh7th/nvim-cmp",
-    requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+    requires = { "hrsh7th/cmp-nvim-lsp", "saadparwaiz1/cmp_luasnip" },
+})
+use({
+    "L3MON4D3/LuaSnip",
+    after = "nvim-cmp",
+    requires = { { "rafamadriz/friendly-snippets" } },
 })
 use({
     "jose-elias-alvarez/null-ls.nvim",
