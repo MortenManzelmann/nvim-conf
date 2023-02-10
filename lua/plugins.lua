@@ -29,7 +29,6 @@ if not status_ok then
   return
 end
 
-
 -- Have packer use a popup window
 packer.init({
     display = {
@@ -40,53 +39,52 @@ packer.init({
 })
 
 local use = packer.use
-use 'wbthomason/packer.nvim'
-use 'EdenEast/nightfox.nvim'
-use { -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
+use("wbthomason/packer.nvim")
+use("EdenEast/nightfox.nvim")
+use({
+    -- LSP Configuration & Plugins
+    "neovim/nvim-lspconfig",
     requires = {
         -- Automatically install LSPs to stdpath for neovim
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
 
         -- Useful status updates for LSP
-        'j-hui/fidget.nvim',
+        "j-hui/fidget.nvim",
 
         -- Additional lua configuration, makes nvim stuff amazing
-        'folke/neodev.nvim',
-        "mfussenegger/nvim-dap"
+        "folke/neodev.nvim",
+        "mfussenegger/nvim-dap",
     },
-}
+})
 
-use { -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-}
+use({
+    -- Autocompletion
+    "hrsh7th/nvim-cmp",
+    requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+})
 use({
     "jose-elias-alvarez/null-ls.nvim",
     requires = { "nvim-lua/plenary.nvim" },
 })
-use { 'nvim-lualine/lualine.nvim', }
-use { 'kyazdani42/nvim-tree.lua', }
-use { 'kyazdani42/nvim-web-devicons', }
-use {
-    'nvim-telescope/telescope.nvim',
-    requires = { { 'nvim-lua/plenary.nvim' } }
-}
-use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
-use('nvim-treesitter/playground')
+use({ "nvim-lualine/lualine.nvim" })
+use({ "kyazdani42/nvim-tree.lua" })
+use({ "kyazdani42/nvim-web-devicons" })
+use({
+    "nvim-telescope/telescope.nvim",
+    requires = { { "nvim-lua/plenary.nvim" } },
+})
+use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+use("nvim-treesitter/playground")
 use("mbbill/undotree")
---   use 'tpope/vim-fugitive' -- Git commands in nvim
---   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
---   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
---   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
--- Add indentation guides even on blank lines
---   use 'lukas-reineke/indent-blankline.nvim'
--- Add git related info in the signs columns and popups
---   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
---   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
---   -- Post-install/update hook with neovim command
---   use('MunifTanjim/prettier.nvim')
+use("windwp/nvim-ts-autotag")
+use("windwp/nvim-autopairs")
+use("lewis6991/gitsigns.nvim")
+use("dinhhuy258/git.nvim")
+use("tpope/vim-commentary")
+use("lukas-reineke/indent-blankline.nvim")
+use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" })
+
 if PACKER_BOOTSTRAP then
   require("packer").sync()
 end
