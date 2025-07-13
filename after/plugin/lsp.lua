@@ -33,27 +33,23 @@ end
 
 local null_ls = require("null-ls")
 null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.prettierd,
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.phpcbf,
-    },
+  sources = {
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.phpcbf,
+    null_ls.builtins.diagnostics.twigcs,
+  },
 })
 local servers = {
   -- gopls = {},
   -- rust_analyzer = {},
-    clangd = {},
-    pyright = {},
-    tsserver = {},
-    phpactor = {},
-    tailwindcss = {},
-    html = {},
-    sumneko_lua = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
+  clangd = {},
+  pyright = {},
+  ts_ls = {},
+  phpactor = {},
+  tailwindcss = {},
+  html = {},
+  lua_ls ={}
 }
 
 -- Setup neovim lua configuration
@@ -70,17 +66,7 @@ require("mason").setup()
 local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
-    ensure_installed = vim.tbl_keys(servers),
-})
-
-mason_lspconfig.setup_handlers({
-    function(server_name)
-      require("lspconfig")[server_name].setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-          settings = servers[server_name],
-      })
-    end,
+  ensure_installed = vim.tbl_keys(servers),
 })
 
 -- Turn on lsp status information
@@ -91,40 +77,40 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 cmp.setup({
-    snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-    },
-    mapping = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping.scroll_docs( -4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete({}),
-        ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-        }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable( -1) then
-            luasnip.jump( -1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete({}),
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
     }),
-    sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-    },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }),
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  },
 })

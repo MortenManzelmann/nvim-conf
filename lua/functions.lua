@@ -17,7 +17,6 @@ local Mode = {
     visual = "v",
 }
 
----comment
 ---@param mode string
 ---@param key string
 ---@param result any
@@ -31,7 +30,7 @@ function M.insertModeRemap(key, result)
   M.keyMapper(Mode.insert, key, result)
 end
 
----@param kky string
+---@param key string
 ---@param result any
 function M.normalModeRemap(key, result)
   M.keyMapper(Mode.normal, key, result)

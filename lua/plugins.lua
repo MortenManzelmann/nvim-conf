@@ -4,13 +4,13 @@ local cmd = vim.cmd
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system({
-          "git",
-          "clone",
-          "--depth",
-          "1",
-          "https://github.com/wbthomason/packer.nvim",
-          install_path,
-      })
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  })
   print("Installing packer close and reopen Neovim...")
   vim.cmd([[packadd packer.nvim]])
 end
@@ -31,46 +31,46 @@ end
 
 -- Have packer use a popup window
 packer.init({
-    display = {
-        open_fn = function()
-          return require("packer.util").float({ border = "rounded" })
-        end,
-    },
+  display = {
+    open_fn = function()
+      return require("packer.util").float({ border = "rounded" })
+    end,
+  },
 })
 
 local use = packer.use
 use("wbthomason/packer.nvim")
-use("EdenEast/nightfox.nvim")
+use 'navarasu/onedark.nvim'
 use({
-    -- LSP Configuration & Plugins
-    "neovim/nvim-lspconfig",
-    requires = {
-        -- Automatically install LSPs to stdpath for neovim
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
+  -- LSP Configuration & Plugins
+  "neovim/nvim-lspconfig",
+  requires = {
+    -- Automatically install LSPs to stdpath for neovim
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
 
-        -- Useful status updates for LSP
-        "j-hui/fidget.nvim",
+    -- Useful status updates for LSP
+    "j-hui/fidget.nvim",
 
-        -- Additional lua configuration, makes nvim stuff amazing
-        "folke/neodev.nvim",
-        "mfussenegger/nvim-dap",
-    },
+    -- Additional lua configuration, makes nvim stuff amazing
+    "folke/neodev.nvim",
+    "mfussenegger/nvim-dap",
+  },
 })
 use({
-    "hrsh7th/nvim-cmp",
-    requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+  "hrsh7th/nvim-cmp",
+  requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 })
 use({
-    "jose-elias-alvarez/null-ls.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+  "nvimtools/none-ls.nvim",
+  requires = { "nvim-lua/plenary.nvim" },
 })
 use({ "nvim-lualine/lualine.nvim" })
 use({ "kyazdani42/nvim-tree.lua" })
 use({ "kyazdani42/nvim-web-devicons" })
 use({
-    "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/plenary.nvim" } },
+  "nvim-telescope/telescope.nvim",
+  requires = { { "nvim-lua/plenary.nvim" } },
 })
 use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 use("nvim-treesitter/playground")
